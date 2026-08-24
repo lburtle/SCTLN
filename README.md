@@ -70,7 +70,7 @@ Model and metric implementations live in `src/`, imported by the scripts above:
 
 - Hardening divergence is reported as-is and is not near-zero; this is expected and discussed in Section 4.3, not a bug in hardened_ctln_check.py.
 - Currently takes roughly 9 hours to complete a 150 seed sweep for 5 node SCTLN training, which is longer than ideal, but should be expected.
-- Raw checkpoints not included due to size; summary CSVs in results/ are sufficient to verify reported numbers.
+- Raw checkpoints not included due to size; summary files in results/ are sufficient to verify reported numbers.
 
 ## Dependencies
 
