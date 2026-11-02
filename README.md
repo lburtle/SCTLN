@@ -1,6 +1,6 @@
 # SCTLNs: Learning Graph Structure and Dynamics in Combinatorial Threshold-Linear Networks via Evolution Strategies — Code Supplementary
 
-Code accompanying our NeurReps 2026 Proceedings Track submission. This repository is provided for reviewer reproducibility and has been anonymized for double-blind review.
+Code accompanying SCTLN pre-print posted to arXiv. All used scripts and associated run logs are provided, as well as figures used in the paper.
 
 ## Setup
 
