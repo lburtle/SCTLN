@@ -5,17 +5,13 @@ import numpy as np
 def fit_readout(xs: jax.Array, targets: jax.Array, ridge: float) -> tuple[jax.Array, jax.Array]:
     """(T,n), (T,m) -> R (m,n), b (m,). Must be jittable + vmappable
     (closed form, no Python branching), because it runs inside fitness per candidate."""
-    T = xs.shape[0]
-    Xa = jnp.concatenate([xs, jnp.ones((T, 1))], axis=1)  # (T, n+1)
-
-    n = xs.shape[1]
-    d = ridge * jnp.ones(n + 1)
-    d = d.at[-1].set(0.0)
-    A = Xa.T @ Xa + jnp.diag(d)   # (n+1, n+1)
-    B = Xa.T @ targets                       # (n+1, m)
-    theta = jnp.linalg.solve(A, B)
-    R = theta[:n].T                          # (m, n)
-    b = theta[n]                             # (m,)
+    T, n = xs.shape
+    x_mean, y_mean = xs.mean(axis=0), targets.mean(axis=0)
+    Xc, Yc = xs - x_mean, targets - y_mean
+    G = Xc.T @ Xc
+    theta = jnp.linalg.solve(G + ridge_eff * jnp.eye(n), Xc.T @ Yc) # (n, m)
+    R = theta.T
+    b = y_mean - R @ x_mean
 
     return R, b
 
